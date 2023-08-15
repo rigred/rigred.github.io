@@ -4,7 +4,7 @@ title: Creating SoCat-57 Part 1
 date: 2022-03-31 16:42:08.000000000 +02:00
 type: post
 categories:
-- Hardware Mods
+- Hardware
 - PCB Designs
 tags:
 excerpt: In this first article I will tell you how I came to creating a new printed
@@ -56,7 +56,7 @@ Thus began the search for some old Socket 5-to-7 interposer devices such as the 
 
 They were either not available at all or the few I could find were selling for hundreds of dollars. My budget was about $30 at most. And I had just missed a broken one that sold for $25.25.
 
-![]({{ site.baseurl }}/assets/2022/03/image-2.png)  
+![]({{ site.baseurl }}/assets/2022/03/image-2.png)
 
 TurboChip listing I missed.
 
@@ -64,7 +64,7 @@ And I wanted, no, I _needed_ two. What fun is a dual socket board if you can onl
 
 But this listing did provide some insight into how Kingston engineers had built this adapter. Evidently nothing more than a RC5057M synchronous regulator driving your average two N-channel MOSFETs with a small assortment of passives.
 
-![]({{ site.baseurl }}/assets/2022/03/Screenshot_20220404_160431-1024x845.jpeg)  
+![]({{ site.baseurl }}/assets/2022/03/Screenshot_20220404_160431-1024x845.jpeg)
 
 TurboChip TC400 variant that uses a dual N-Channel Mosfet regulator arrangement
 
@@ -74,7 +74,7 @@ The circuit for this is approximately identical to the one given in the referenc
 
 Earlier versions of this Adapter also used the Raytheon RC5036M regulator itself a resistance programmed device. By switching together various combinations of resistors a range of desirable voltages could be achieved. This can be seen in the picture sent to me by my friend Carlos.
 
-![]({{ site.baseurl }}/assets/2022/03/Screenshot_20220404_160235-1024x793.jpeg)  
+![]({{ site.baseurl }}/assets/2022/03/Screenshot_20220404_160235-1024x793.jpeg)
 
 Earlier Tubochip variant that uses the RC5036 with a Mosfet+ Diode regulator arrangement. Picture Credit: Carlos S.M.
 
@@ -82,7 +82,7 @@ This is effectively the same but less efficient regulator arrangement than found
 
 More interesting however were the rest of pictures Carlos sent me, specifically how the sockets where assembled. I had a hunch that it was nothing more than two sockets stacked on-top of each other through the PCB, with the VCC2 (Vcore pins) removed.
 
-![]({{ site.baseurl }}/assets/2022/03/turbochip-cropped-768x1024.jpg)  
+![]({{ site.baseurl }}/assets/2022/03/turbochip-cropped-768x1024.jpg)
 
 Disassembled Earlier TuboChip variant showing pin arrangement. Picture Credit: Carlos S.M.
 

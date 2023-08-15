@@ -5,9 +5,30 @@ date: 2023-05-04 13:50:57.000000000 +02:00
 type: post
 categories:
 - Hardware
-- Hardware Mods
+- Mods
 tags:
-excerpt: 'A simple guide to get more out of your  SiI0649/CMD-649 PCI IDE Card. '
+gallery:
+  - url: /assets/2023/05/thumb300x212-images661846-1.jpg
+    image_path: /assets/2023/05/thumb300x212-images661846-1.jpg
+    alt: CMD-0649 unbranded variant 1
+    title:
+  - url: /assets/2023/05/TN-ATA100-card-2.jpg
+    image_path: /assets/2023/05/TN-ATA100-card-2.jpg
+    alt: 
+    title:
+  - url: /assets/2023/05/CMD-RAID-2-1024x768.webp
+    image_path: /assets/2023/05/CMD-RAID-2-1024x768.webp
+    alt: 
+    title:
+  - url: /assets/2023/05/ee3038b44000bf01c6d63ace624f-1.jpg
+    image_path: /assets/2023/05/ee3038b44000bf01c6d63ace624f-1.jpg
+    alt: 
+    title:
+  - url: /assets/2023/05/CMD-ATA100-2.jpg
+    image_path: /assets/2023/05/CMD-ATA100-2.jpg
+    alt: 
+    title:
+
 ---
 # Introduction:
 -------------
@@ -21,15 +42,7 @@ This vintage device usually has a few jumpers on its board, most of which are so
 
 This card exists in quite a few forms, both with the original CMD 649 chip and the relabeled Silicon Image branded variation.
 
-![]({{ site.baseurl }}/assets/2023/05/thumb300x212-images661846-1.jpg)
-
-![]({{ site.baseurl }}/assets/2023/05/TN-ATA100-card-2.jpg)
-
-![]({{ site.baseurl }}/assets/2023/05/CMD-RAID-2-1024x768.webp)
-
-![]({{ site.baseurl }}/assets/2023/05/ee3038b44000bf01c6d63ace624f-1.jpg)
-
-![]({{ site.baseurl }}/assets/2023/05/CMD-ATA100-2.jpg)
+{% include gallery caption="Gallery of CMD-649 variants." %}
 
 # Unlocking Compatibility with Older Motherboards:
 ------------------------------------------------

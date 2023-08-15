@@ -3,11 +3,11 @@ title: "Overclock your Ryzen CPU from linux"
 date: 2018-03-28
 excerpt: "Overclock your Ryzen CPU without the UEFI while running Linux, no proprietary tools needed."
 categories:
-  - Linux
+  - Software
   - Overclocking
 tags:
   - AMD
-  - AMD Ryzen
+  - Zen 1
   - Overclocking
   - MSR
 ---

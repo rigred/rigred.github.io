@@ -1,0 +1,13 @@
+Rigo Reddig:
+  name: "Rigo Reddig"
+  avatar: "/assets/images/bio-photo.jpg"
+  bio: "IT security professional. Hobbyist hardware hacker.  Enjoy repairing or modifying technology in all shapes and forms."
+  location: "Namibia"
+  links:
+    - label: "GitHub"
+      icon: "fab fa-fw fa-github"
+      url: "https://github.com/rigred"
+    - label: "Linkedin"
+      icon: "fab fa-fw fa-linkedin"
+      url: "https://www.linkedin.com/in/rigo-reddig-756782129/"
+
