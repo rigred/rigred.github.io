@@ -12,7 +12,7 @@ tags:
 ---
 This post contains the latest known drivers for the ATI, Formerly SonicBlue, Formerly Diamond Multimedia [FireGL 2](https://www.techpowerup.com/gpu-specs/fire-gl2.c), 3 and 4 Graphics cards that are powered by the IBM RC1000 and GT1000 "Sandstorm" Graphics chips.
 
-[ATI-FGL-2-software-kit.zip]({{ site.baseurl }}/drivers/ATI-FGL-2-software-kit.zip)
+[ATI-FGL-2-software-kit.zip](https://github.com/rigred/rigred.github.io/raw/gh-pages/drivers/ATI%20FGL%202%20software%20kit.zip)
 
 Above you can download a ZIP archive that includes the following files pulled from an HP X2000 workstation drive.
 
