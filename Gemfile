@@ -8,6 +8,7 @@ source "https://rubygems.org"
 gem "github-pages", group: :jekyll_plugins
 gem "jekyll-include-cache", group: :jekyll_plugins
 gem 'jekyll-archives', group: :jekyll_plugins
+gem "json"
 
 # require for github pages for minimal-mistakes theme
 # If you want to use GitHub Pages, remove the "gem "jekyll"" above and

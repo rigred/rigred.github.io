@@ -2,7 +2,6 @@
 toc_label: "ATI Fire GL 2/4 Software"
 title: ATI FireGL 2 and 4 Drivers/BIOS
 date: 2022-07-05 23:48:41.000000000 +02:00
-type: post
 categories:
   - Software
 tags:

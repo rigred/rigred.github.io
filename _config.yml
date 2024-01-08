@@ -120,6 +120,69 @@ defaults:
       type: pages
     values:
       layout: single
-      author_profile: true
+      author_profile: false
+      toc: false
+      toc_sticky: false
+  # _projects
+  - scope:
+      path: ""
+      type: projects
+    values:
+      layout: single
+      read_time: false
+      author_profile: false
+      share: true
+      comments: false
       toc: true
       toc_sticky: true
+  # _software
+  - scope:
+      path: ""
+      type: software
+    values:
+      layout: single
+      read_time: false
+      author_profile: false
+      share: true
+      comments: false
+      toc: true
+      toc_sticky: true
+  # _hardare
+  - scope:
+      path: ""
+      type: hardware
+    values:
+      layout: single
+      read_time: false
+      author_profile: false
+      share: true
+      comments: false
+      toc: true
+      toc_sticky: true
+  # _misc
+  - scope:
+      path: ""
+      type: misc
+    values:
+      layout: single
+      read_time: false
+      author_profile: false
+      share: true
+      comments: false
+      toc: true
+      toc_sticky: true
+
+collections_dir: docs
+collections:
+  hardware:
+    output: true
+    permalink: /hardware/:name/
+  software:
+    output: true
+    permalink: /software/:name/
+  projects:
+    output: true
+    permalink: /projects/:name/
+  misc:
+    output: true
+    permalink: /misc/:name/
