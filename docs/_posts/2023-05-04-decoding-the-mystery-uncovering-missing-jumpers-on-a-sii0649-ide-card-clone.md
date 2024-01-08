@@ -3,6 +3,8 @@ toc_label: "SiI0649 Jumper Decoding"
 title: 'Decoding the Mystery: Uncovering Missing Jumpers on a SiI0649 IDE Card Clone'
 date: 2023-05-04 13:50:57.000000000 +02:00
 type: post
+header: 
+ teaser: /assets/2023/05/Modified-CMD-649-1024x725.webp
 categories:
 - Hardware
 - Mods
