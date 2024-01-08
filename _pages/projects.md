@@ -8,5 +8,5 @@ classes: wide
 date: 2022-03-25 08:04:15.000000000 +02:00
 type: page
 ---
-This page serves as the directory of my public project resources and their associated blog posts.
+This page serves as the directory of my public project pages.
 

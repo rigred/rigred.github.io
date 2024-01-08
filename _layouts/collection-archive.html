@@ -1,0 +1,18 @@
+---
+layout: default
+---
+
+<h1>{{ page.title }}</h1>
+
+<ul>
+  {% for item in site.page.path | split: "/" %}
+    {% if item != "" %}
+      {% assign collection = site[item] %}
+      {% for content in collection %}
+        <li>
+          <a href="{{ content.url }}">{{ content.title }}</a>
+        </li>
+      {% endfor %}
+    {% endif %}
+  {% endfor %}
+</ul>
