@@ -96,9 +96,61 @@ The mystery was solved. The weird performance wasn't a bug or a case of a "missi
 
 ---
 
+### Update: Confirmed Architectural Details
+
+Further system-level analysis using `numactl` and `lscpu` provided a ground-truth confirmation of the Kunpeng 916's architecture, validating the initial microbenchmark results and revealing a deeper level of complexity.
+
+#### System Topology and NUMA Layout
+
+* **Four NUMA Nodes:** The dual-socket 64-core system presents to the operating system as four distinct NUMA nodes. Each 16-core die within a CPU package constitutes a single NUMA node.
+  * Socket 0: Contains NUMA Node 0 (Cores 0-15) and NUMA Node 1 (Cores 16-31).
+  * Socket 1: Contains NUMA Node 2 (Cores 32-47) and NUMA Node 3 (Cores 48-63).
+
+```log
+available: 4 nodes (0-3)
+node 0 cpus: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15
+node 1 cpus: 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31
+node 2 cpus: 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47
+node 3 cpus: 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63
+```
+
+* **Quantified Latency:** The relative latency costs for memory access across the interconnect are now quantified:
+  * **Intra-Die (Local):** Baseline latency cost of `10`.
+  * **Inter-Die (Same Socket):** Latency cost of `15`.
+  * **Inter-Socket (Remote CPU):** Latency cost of `20`.
+
+```log
+node distances:
+node   0   1   2   3
+  0:  10  15  20  20
+  1:  15  10  20  20
+  2:  20  20  10  15
+  3:  20  20  15  10
+```
+
+#### L3 Cache Hierarchy and the "8 MB Cliff"
+
+* **64 MB Total L3 Cache:** The dual-socket system has a total of 64 MB of L3 cache, with each 32-core CPU providing 32 MB. This cache is distributed across the dies, giving each of the four 16-core NUMA nodes a **16 MB L3 cache slice**.
+
+#### Integrated I/O, Not a Chiplet
+
+The final mystery was whether the Kunpeng 916 used a separate I/O die like its successor. The `PCIe Device NUMA Affinity` section of the log gave a clear answer: No.
+
+```log
+7. PCIe Device NUMA Affinity
+==============================================================================
+  0002:e8:00.0  node 0  bridge: Huawei Technologies Co., Ltd. Device 1610
+  0004:49:00.0  node 1  Attached SCSI controller: Broadcom / LSI SAS3008
+  000d:31:00.0  node 3  compatible controller: Advanced Micro Devices, Inc. [AMD/ATI] Ellesmere
+```
+
+The output shows PCIe devices, including an AMD GPU and a SAS controller, are attached to different NUMA nodes. This confirms that I/O controllers are integrated directly onto the compute dies, making the Kunpeng 916 a more monolithic System-on-a-Chip (SoC) design rather than a chiplet-based one.
+
+---
+
 ### What This Architecture Is Good For
 
-A design like this is a deliberate trade-off. It sacrifices uniform low latency for massive parallelism and throughput. This makes the Kunpeng 916 specialized.
+This deep, hierarchical design is a deliberate trade-off. It sacrifices uniform low latency for massive parallelism and throughput. This makes the Kunpeng 916 specialized.
 
 * **Strengths:** This CPU is built for workloads that can be neatly partitioned and spread across its many cores. Think scientific computing, large-scale data processing, and other throughput-oriented tasks. If you can design your problem so that each 8-core cluster is mostly working on data within its local 8 MB L3 slice, you can unleash the full power of the chip.
 
@@ -108,15 +160,14 @@ A design like this is a deliberate trade-off. It sacrifices uniform low latency 
 
 ### How to Program for It
 
-For anyone writing software for this hardware, the takeaway is simple: **you must be NUMA-aware.** Ignoring the topology is a recipe for inconsistent, and likely poor, performance.
+For anyone writing software for this hardware, the takeaway is simple: you must be NUMA-aware. The detailed topology underscores this critical need. For optimal performance, processes should be pinned not just to a specific CPU socket, but to the specific 16-core NUMA node (die) that provides the lowest latency access to the required resources.
 
-* **Pin Your Processes:** Use tools like `taskset` or `numactl` to lock your virtual machines or application's threads to the cores within a specific physical domain. For the lowest latency, pin them to a single 8-core cluster (e.g., cores 0-7). This ensures they share the fastest L2 and L3 resources.
+* **Pin Your Processes:** Use tools like `taskset` or `numactl` to lock your applications to the cores within a specific physical domain (e.g., cores 0-7 for an 8-core cluster, or 0-15 for a full die).
 
-* **Place Your Memory:** Thread pinning is useless if the data lives on another continent (or, in this case, another NUMA node). Use `numactl --membind` to tie a process's memory allocation to its local NUMA node. This keeps L3 misses from turning into catastrophically slow cross-socket memory accesses.
+* **Place Your Memory and Peripheraps:** Thread pinning is useless if the data or devices live on another die. For example, since the log shows the AMD GPU is on NUMA node 3, a GPGPU application should have its threads and memory explicitly bound to that node to avoid the 1.5x-2.0x latency penalty of cross-die communication:
+`numactl --physcpubind=48-63 --membind=3 ./my_gpu_application`
 
-* **Design for Locality:** The best approach is to design algorithms that respect the hardware. Keep the "hot" working set for latency-sensitive tasks within the 8 MB local L3 slice. For throughput-bound jobs, break the problem into chunks and assign each chunk to a cluster, letting it work on its local data.
-
----
+* **Design for Locality:** The best approach is to design algorithms that respect the hardware. Keep the "hot" working set for latency-sensitive tasks within the 8 MB local L3 slice.
 
 ### Looking Forward to Look Back: What the Kunpeng 920 Tells Us
 
@@ -127,7 +178,7 @@ A high-level block diagram of the Kunpeng 920. Source: WikiChip
 
 Looking at the Kunpeng 920's architecture, we can see a clear evolutionary path from the 916. This isn't a revolution; it's a refinement of a consistent design philosophy. 
 
-* **The Sliced Cache Philosophy is Confirmed:** The Kunpeng 920 features a large L3 cache that is explicitly described as "1 MiB per core," shared among all cores. For a 64-core chip, this means a 64 MB L3 cache, physically implemented as 64 distinct 1 MB slices. This is the ultimate validation of our primary theory about the 916. The "32x1MB" spec for the 916 wasn't a mistake; it was the first iteration of a granular, distributed NUCA design that Huawei would carry forward and refine. Our discovery of the 8 MB NUCA domains in the 916 was, in fact, uncovering the first draft of this long-term architectural plan.
+* **The Sliced Cache Philosophy is Confirmed:** The Kunpeng 920 features a large L3 cache that is explicitly described as "1 MiB per core." This validates our discovery that the 916's L3 is a granular, distributed NUCA design.
 
 * **The Interconnect's Family Tree:** The Kunpeng 920 uses a high-speed, proprietary interconnect called the Huawei Cache Coherency System (HCCS) for multi-socket communication, implemented with ports codenamed "Hydra". The Kunpeng 916 was the first chip in the family to support 2-way SMP, so it stands to reason that it contains the first generation of this HCCS interconnect. The distinct latency tiers we measured in the core-to-core heatmap are the performance fingerprint of this "Proto-HCCS" fabric. 
 
