@@ -22,6 +22,7 @@ The HiSilicon Kunpeng 916 (Hi1616) CPU. Source: WikiChip
 The scene was the Xeon Phi Discord, a place for folks who appreciate esoteric hardware. A user named Resbi dropped a message that immediately caught my attention:
 
 > Resbi — 9 July at 16:51
+> 
 > I got ssh to a Hi1616 2x32 cores TaiShan 2280 server
 
 Suddenly, a special beast was on the network. The Kunpeng 916 (Hi1616) is a fascinating chip. Released around 2017, it was one of Huawei's first serious forays into multi-socket ARM server CPUs, a shot across the bow of the x86-dominated data center. But unlike its more modern successors, its inner workings are largely a black box.
