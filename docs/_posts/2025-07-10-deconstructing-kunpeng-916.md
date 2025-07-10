@@ -128,10 +128,6 @@ node   0   1   2   3
   3:  20  20  15  10
 ```
 
-#### L3 Cache Hierarchy and the "8 MB Cliff"
-
-* **64 MB Total L3 Cache:** The dual-socket system has a total of 64 MB of L3 cache, with each 32-core CPU providing 32 MB. This cache is distributed across the dies, giving each of the four 16-core NUMA nodes a **16 MB L3 cache slice**.
-
 #### Integrated I/O, Not a Chiplet
 
 The final mystery was whether the Kunpeng 916 used a separate I/O die like its successor. The `PCIe Device NUMA Affinity` section of the log gave a clear answer: No.
