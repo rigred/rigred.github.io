@@ -1,7 +1,7 @@
 ---
 toc_label: "Kunpeng 916 Deep Dive"
 title: "Deconstructing the Kunpeng 916: A Community-Driven Deep Dive"
-date: 2025-07-10 13:17:29.000000000 +02:00
+date: 2025-07-10 13:10:29.000000000 +02:00
 type: post
 categories:
 - Hardware
