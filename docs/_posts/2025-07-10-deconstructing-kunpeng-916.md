@@ -8,7 +8,7 @@ categories:
 - ARM
 - Reverse Engineering
 tags: [hisilicon, kunpeng, arm, cpu, architecture, cache, numa, nuca]
-excerpt: Some of the best stories in hardware start not in a corporate lab, but in a corner of the internet where enthusiasts gather. This is the story of how a rare ARM server CPU was deconstructed, starting with a single message on Discord.
+excerpt: Some of the best stories in hardware start not in a corporate lab, but in a corner of the internet where enthusiasts gather. This is the story of how a Huawei/HiSilicon ARM server CPU was deconstructed, starting with a single message on Discord.
 ---
 
 Some of the best stories in hardware start not in a corporate lab, but in a corner of the internet where enthusiasts gather. This is one of those stories. It’s about a piece of silicon that’s both pivotal and poorly documented: the HiSilicon 1616, also known as the Kunpeng 916. And it begins, as these things often do, with a simple message on Discord.
