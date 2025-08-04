@@ -27,8 +27,6 @@ description: >- # this means to ignore newlines until "baseurl:"
   This is a journal of hardware archaeology and a brain dump for the cursed knowledge acquired while working with tech. 
   It's a collection of lab notes from the front lines, documenting the process of disassembling things never meant to be opened, 
   designing custom PCBs to bridge hardware timelines, and turning sheer spite into working prototypes.
-
-Fueled by solder fumes and a belief in low-level sorcery, this is where we answer the question, "I wonder if I can make this work again?" If it clicks, whines, or boots from a floppy, you'll probably find it here.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 github_username:  rigred
