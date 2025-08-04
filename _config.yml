@@ -45,15 +45,6 @@ plugins:
   - jekyll-feed
   - jekyll-include-cache
 
-whitelist:
-  - jekyll-remote-theme
-  - jekyll-paginate
-  - jekyll-sitemap
-  - jekyll-gist
-  - jekyll-feed
-  - jekyll-toc
-  - jekyll-include-cache
-
 # jekyll-toc configuration
 toc:
   min_level: 2

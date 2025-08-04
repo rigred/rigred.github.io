@@ -22,7 +22,7 @@ Some of the best stories in hardware start not in a corporate lab, but in a corn
 The scene was the Xeon Phi Discord, a place for folks who appreciate esoteric hardware. A user named Resbi dropped a message that immediately caught my attention:
 
 > Resbi — 9 July at 16:51
-> 
+>
 > I got ssh to a Hi1616 2x32 cores TaiShan 2280 server
 
 Suddenly, a special beast was on the network. The Kunpeng 916 (Hi1616) is a fascinating chip. Released around 2017, it was one of Huawei's first serious forays into multi-socket ARM server CPUs, a shot across the bow of the x86-dominated data center. But unlike its more modern successors, its inner workings are largely a black box.
@@ -61,7 +61,7 @@ The resulting 64x64 matrix was a beautiful, symmetrical blueprint of the server'
 
 1. **Two Sockets:** The map was split into four big 32x32 quadrants. Communication *within* the first 32 cores and *within* the second 32 cores was fast (blue). Communication *between* the two groups was slow (red). Classic dual-socket system. This confirmed the "2x32 cores" in Resbi's initial message.
 
-2. **Two Dies Per Socket:** Zooming into a single 32-core socket, we saw another split. Cores 0-15 could talk to each other faster than they could talk to cores 16-31. This was the smoking gun for a Multi-Chip Module (MCM) design. Each 32-core Kunpeng 916 CPU wasn't one monolithic piece of silicon, but two 16-core dies living in the same package. As Resbi confirmed: "YES... 1 die has 16 cores". HiSilicon refers to these two compute dies as the Super CPU cluster (SCCL). 
+2. **Two Dies Per Socket:** Zooming into a single 32-core socket, we saw another split. Cores 0-15 could talk to each other faster than they could talk to cores 16-31. This was the smoking gun for a Multi-Chip Module (MCM) design. Each 32-core Kunpeng 916 CPU wasn't one monolithic piece of silicon, but two 16-core dies living in the same package. As Resbi confirmed: "YES... 1 die has 16 cores". HiSilicon refers to these two compute dies as the Super CPU cluster (SCCL).
 
 3. **Two Clusters Per Die:** Digging even deeper into a single 16-core die, we saw yet another boundary. Cores 0-7 communicated faster with each other than with cores 8-15. This meant each 16-core die was composed of two 8-core clusters.
 
