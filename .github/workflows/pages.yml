@@ -2,20 +2,26 @@
 name: Build and Deploy Jekyll Site
 
 on:
+  # Runs on pushes targeting the default branch
   push:
-    branches: ["gh-pages"] # Or "master" if that is your default branch
+    branches: ["main"]
+
+  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
   contents: read
   pages: write
   id-token: write
 
+# Allow only one concurrent deployment
 concurrency:
   group: "pages"
   cancel-in-progress: false
 
 jobs:
+  # Build job
   build:
     runs-on: ubuntu-latest
     steps:
@@ -24,20 +30,22 @@ jobs:
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.1' # This version works well with recent Jekyll versions
-          bundler-cache: true # This will run `bundle install` and cache your gems
+          ruby-version: '3.1' # Or a version compatible with your gems
+          # This command automatically runs `bundle install` and caches gems
+          # to speed up future builds. It will install jekyll-toc.
+          bundler-cache: true
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v5
       - name: Build with Jekyll
-        # Use the build command with the baseurl set by the configure-pages action
+        # This command builds the site using the gems installed from your Gemfile
         run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
         env:
           JEKYLL_ENV: production
       - name: Upload artifact
-        # Automatically upload the built site from the `_site` directory
         uses: actions/upload-pages-artifact@v3
 
+  # Deployment job
   deploy:
     environment:
       name: github-pages
