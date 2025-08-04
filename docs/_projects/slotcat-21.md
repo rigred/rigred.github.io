@@ -1,7 +1,7 @@
 ---
 title: SlotCat-21
 date: 2022-03-25 08:04:15.000000000 +02:00
-type: page
+type: post
 excerpt: A Slot-2 CPU to Slot-1 motherboard adapter. 
 header:
  teaser: /assets/2024/01/Intel Cascades.jpg

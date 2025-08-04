@@ -1,4 +1,6 @@
 ---
+layout: post
+toc: true
 toc_label: "Kunpeng 916 Deep Dive"
 title: "Deconstructing the Kunpeng 916: A Community-Driven Deep Dive"
 date: 2025-07-10 13:10:29.000000000 +02:00
@@ -13,9 +15,7 @@ excerpt: Some of the best stories in hardware start not in a corporate lab, but 
 
 Some of the best stories in hardware start not in a corporate lab, but in a corner of the internet where enthusiasts gather. This is one of those stories. It’s about a piece of silicon that’s both pivotal and poorly documented: the HiSilicon 1616, also known as the Kunpeng 916. And it begins, as these things often do, with a simple message on Discord.
 
-![KP916 Image](https://en.wikichip.org/w/images/thumb/4/42/hi1616_%28front%29.png/300px-hi1616_%28front%29.png)
-
-The HiSilicon Kunpeng 916 (Hi1616) CPU. Source: WikiChip
+![The HiSilicon Kunpeng 916 (Hi1616) CPU. Source: WikiChip](https://en.wikichip.org/w/images/thumb/4/42/hi1616_%28front%29.png/300px-hi1616_%28front%29.png)
 
 ### The Discovery
 
@@ -39,8 +39,7 @@ The basic specs of the Kunpeng 916 (formerly Hi1616) are as follows:
 
 Armed with access and the Chips and Cheese microbenchmarking toolkit, Resbi started pulling data. And that’s when things got weird.
 
-![KP916 Latency Test, Source: Resbi, Xeon Phi Discord]({{ site.baseurl }}/assets/2025/07/kp916-latency-test.jpg)
-*Cache latency test results. Source: Resbi, Xeon Phi Discord*
+![KP916 Latency test results. Source: Resbi, Xeon Phi Discord*]({{ site.baseurl }}/assets/2025/07/kp916-latency-test.jpg)
 
 The initial results from the cache latency test were baffling. The public specs for the Kunpeng 916, primarily from sources like WikiChip, claim it has a 32 MB L3 cache. But the data showed something else entirely. The graph paints a clear picture of the memory hierarchy. [hi1616](https://en.wikichip.org/wiki/hisilicon/kunpeng/hi1616)
 
@@ -56,8 +55,7 @@ This "8 MB cliff" was a mystery. It proves the 32 MB L3 isn't uniform, but it ra
 
 A core-to-core latency test is the perfect tool for this. It measures how long it takes for every core to communicate with every other core, producing a heatmap that reveals the physical topology of the system.
 
-![KP916 Core heatmap, Source: Resbi, Xeon Phi Discord]({{ site.baseurl }}/assets/2025/07/kp916-core-heatmap.jpg)
-*Core-to-core latency heatmap. Source: Resbi, Xeon Phi Discord*
+![Core-to-core latency heatmap. Source: Resbi, Xeon Phi Discord]({{ site.baseurl }}/assets/2025/07/kp916-core-heatmap.jpg)
 
 The resulting 64x64 matrix was a beautiful, symmetrical blueprint of the server's architecture. Reading it layer by layer, the structure became clear:
 
@@ -169,8 +167,8 @@ For anyone writing software for this hardware, the takeaway is simple: you must 
 
 Often, the best way to understand a piece of technology is to look at what came next. The Kunpeng 920, the successor to our mysterious 916, is a perfect example. While details on the 916 are scarce, information on the 920 is more available, and it acts as our Rosetta Stone, confirming many of the theories we developed here.
 
-![kp920 block diagram](https://fuse.wikichip.org/wp-content/uploads/2019/04/taishan-v110-soc-block-diagram.png)
-A high-level block diagram of the Kunpeng 920. Source: WikiChip
+![A high-level block diagram of the Kunpeng 920. Source: WikiChip](https://fuse.wikichip.org/wp-content/uploads/2019/04/taishan-v110-soc-block-diagram.png)
+
 
 Looking at the Kunpeng 920's architecture, we can see a clear evolutionary path from the 916. This isn't a revolution; it's a refinement of a consistent design philosophy. 
 

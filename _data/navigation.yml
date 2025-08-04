@@ -1,9 +1,17 @@
-main:
-  - title: "Posts"
-    url: /year-archive/
-  - title: "Categories"
-    url: /categories/
-  - title: "Collections"
-    url: /collection-archive/
-  - title: "Projects"
-    url: /projects/
+# _data/navigation.yml
+#
+# Defines the main navigation links that appear in the header.
+#
+# - title: The text that will appear in the link.
+#   url: The destination URL.
+- title: Home
+  url: /
+
+- title: About
+  url: /about/
+
+- title: Projects
+  url: /projects/
+
+- title: My GitHub
+  url: https://github.com/rigred

@@ -2,6 +2,7 @@
 toc_label: "SiI0649 Jumper Decoding"
 title: 'Decoding the Mystery: Uncovering Missing Jumpers on a SiI0649 IDE Card Clone'
 date: 2023-05-04 13:50:57.000000000 +02:00
+layout: post
 type: post
 header: 
  teaser: /assets/2023/05/Modified-CMD-649-1024x725.webp
@@ -16,11 +17,11 @@ gallery:
     title:
   - url: /assets/2023/05/TN-ATA100-card-2.jpg
     image_path: /assets/2023/05/TN-ATA100-card-2.jpg
-    alt: 
+    alt:  TN-ATA 100 card
     title:
   - url: /assets/2023/05/CMD-RAID-2-1024x768.webp
     image_path: /assets/2023/05/CMD-RAID-2-1024x768.webp
-    alt: 
+    alt:  CMD RAID 2 Card
     title:
   - url: /assets/2023/05/ee3038b44000bf01c6d63ace624f-1.jpg
     image_path: /assets/2023/05/ee3038b44000bf01c6d63ace624f-1.jpg
@@ -28,25 +29,29 @@ gallery:
     title:
   - url: /assets/2023/05/CMD-ATA100-2.jpg
     image_path: /assets/2023/05/CMD-ATA100-2.jpg
-    alt: 
+    alt: CMD ATA100 card
     title:
+excerpt: Reverse engineering missing jumpers on a generic CMD-649 PCI IDE controller card.
 
 ---
-# Introduction:
+## Introduction
+
 -------------
 
 The CMD-649 Or Silicon Image 649 (Si later acquired CMD) or in my case SiI0649CL160 is a PCI IDE controller chip that has been around for quite some time. Lots of variations of these exist, and can often be cheaply bought new from AliExpress or Ebay. It's an easy way to add ATA-6 100MB/s IDE support to boards that may be limited to 33MB/s ATA. Drivers are available for DOS, Windows 95/98, Windows Millennium, Windows NT 4.0, and Windows 2000, XP etc. The chip is also compatible with default Microsoft IDE drivers.
 
 This vintage device usually has a few jumpers on its board, most of which are soldered and can be a bit of a challenge to figure out due to the lack of documentation. In this post, I will delve into how I reverse-engineered the missing jumpers and traced them back to the controller chip. I'll also provide a link to the datasheet of the chip, an image of my findings, and additional information to help contextualize the jumper settings and understand where each feature may come in handy.
 
-# Variants:
+## Variants
+
 ---------
 
 This card exists in quite a few forms, both with the original CMD 649 chip and the relabeled Silicon Image branded variation.
 
-{% include gallery caption="Gallery of CMD-649 variants." %}
+{% include gallery.html caption="Gallery of CMD-649 variants." %}
 
-# Unlocking Compatibility with Older Motherboards:
+## Unlocking Compatibility with Older Motherboards
+
 ------------------------------------------------
 
 By default, the CMD-649 operates as a PCI RAID storage device with a PCI class code of 0104 instead of a PCI IDE device with a class code of 0101.
@@ -57,7 +62,8 @@ Helpfully It also features it's own Option ROM that allows attaching up to 128GB
 
 Though due to these cards often running in RAID mode by default this presented some issues and prevents direct booting as well as necessitating installing drivers as part of the Operating system install.
 
-# The Datasheet:
+## The Datasheet
+
 --------------
 
 To start with, I managed to find the datasheet for the CMD-649 chip on theretroweb.com. This was a critical resource for understanding the chip's various functions and pinout. You can find the datasheet here at theretroweb chip database.
@@ -72,14 +78,16 @@ There I could get a pin map, with specifically the pins we are interested in box
 
 ![]({{ site.baseurl }}/assets/2023/05/CMD0649-pinout-2.webp)
 
-### Reverse Engineering the Jumpers:
+### Reverse Engineering the Jumpers
+
 --------------------------------
 
 Using the datasheet as a reference, I began tracing the jumper traces to the chip. This allowed me to determine the purpose of each jumper and their corresponding pins on the CMD-649 chip. The image below shows the jumper traces and their connections to the chip. It turns out the designers of my particular card simply reversed all of the jumpers from the design and started counting at 1 instead of 0.
 
 ![]({{ site.baseurl }}/assets/2023/05/Lindy-CMD0649-Jumpers-1-1024x966.webp)
 
-### Understanding the Jumper Settings:
+### Understanding the Jumper Settings
+
 ----------------------------------
 
 After completing the trace, I compiled the jumper settings in a table by cross referencing it to the datasheet Jumper pins.
@@ -106,14 +114,14 @@ This table lists the jumper number, jumper setting, function, default jumper set
 | IDE Device with 0101h at PCI config                          |  JP9   |   1-2   |   2-3   | JP0 |
 | Non IDE Device with 0104h at PCI config (Default)            |  JP9   |   2-3   |         |     |
 
-
 If you are curious here are the specific descriptions from the datasheet for each of the jumper bootstrap pins. Remember to cross reference these to the datasheet pin in the last column of my above table.
 
 ![]({{ site.baseurl }}/assets/2023/05/Bootstrap-jumpers-JP0-JP4-1.png)
 
 ![]({{ site.baseurl }}/assets/2023/05/Bootstrap-jumpers-JP6-JP8.png)
 
-### Modified Card:
+### Modified Card
+
 --------------
 
 A little bit of soldering later and we've got a total of 8 jumpers. Yay!
@@ -122,7 +130,8 @@ Here you can see that I have reconfigured the card to the IDE operating mode (JP
 
 ![]({{ site.baseurl }}/assets/2023/05/Modified-CMD-649-1024x725.webp)
 
-# Conclusion:
+## Conclusion
+
 -----------
 
 Reverse engineering the CMD-649 PCI IDE controller card jumpers was an intriguing little project that allowed me to better understand the device's functions and configurations.

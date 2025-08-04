@@ -1,12 +1,29 @@
 ---
 title: Projects
-layout: collection
+layout: default
 permalink: "/projects/"
-collection: projects
-entries_layout: grid
-classes: wide
-date: 2022-03-25 08:04:15.000000000 +02:00
-type: page
 ---
-This page serves as the directory of my public project pages.
+<header class="post-header">
+  <h1 class="post-title">{{ page.title }}</h1>
+</header>
 
+<div class="post-content">
+  <p>This page serves as the directory of my public project pages.</p>
+</div>
+
+<ul class="post-list">
+  {% for project in site.projects %}
+    <li>
+      <h3>
+        <a class="post-link" href="{{ project.url | relative_url }}">
+          {{ project.title | escape }}
+        </a>
+      </h3>
+      {%- if project.excerpt -%}
+        <div class="post-excerpt">
+          {{ project.excerpt }}
+        </div>
+      {%- endif -%}
+    </li>
+  {% endfor %}
+</ul>

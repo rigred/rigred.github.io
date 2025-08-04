@@ -1,8 +1,10 @@
 ---
+toc: true
 toc_label: "Creating SoCAT-57"
 title: Creating SoCat-57 Part 1
 date: 2022-03-31 16:42:08.000000000 +02:00
 type: post
+layout: post
 categories:
 - Hardware
 - PCB Designs
@@ -136,10 +138,10 @@ As it turned out the only really stable configuration was one interstitial stack
 
 Combinations of 2 doubled sockets or more led to inconsistent results since even with two sockets I was effectively bridging through 4 interfaces.
 
-1.  The CPU Pins itself
-2.  The upper socket
-3.  The interstitial socket
-4.  the motherboard socket.
+1. The CPU Pins itself
+2. The upper socket
+3. The interstitial socket
+4. the motherboard socket.
 
 With 6 sockets as pictured it was a rather glitchy mess.
 
@@ -170,49 +172,49 @@ Further to this we needed an applicable switching regulator controller. Preferab
 
 Several options come into question:
 
-*   Analog Devices
-    *   ADP3154
-*   Cherry (Now OnSemi) (Small BOM, nice regulation, almost not supply)
-    *   CS5161/66
-    *   CS5150/5151
-*   Elantec (made by Intersil)
-    *   EL7571/7556
-*   ST L6911C
-*   National Semiconductor
-    *   LM2636
-    *   LM2635
-*   Raytheon/Fairchild
-    *   RC5051/53/54/57 (Small BOM, good regulation, unstable supply)
-    *   RC5041/42
-*   LinFinity
-    *   LX1660/61
-    *   LX1662/63
-    *   LX1664/65 (Very low cost part)
-*   Linear
-    *   LTC1552/3 (Still in production, small BOM)
-    *   LT1430/35
-    *   LT1753 (Still in production, small BOM)
-*   Harris (Now Intersil)
-    *   HIP6004/5/14 (Already have some, Large BOM)
-    *   HIP6002/3
-    *   HIP6019 (4 different output voltages, suitable for motherboards)
-*   Maxim
-    *   MAX1624
-    *   MAX1636 (Very impressive, _shooting for the stars_) But _OH GOD THE PRICE!_
-    *   MAX1710 (Only up to 2.1V for Mobile K6-2+)
-*   Semtech (Large BOM, low efficiency)
-    *   SC1151/52
-    *   SC1172/73
-    *   SC1182/83
-    *   SC1186
-*   Texas Instruments TPS5210 (Could be nice but availability is poor)
-*   Micro Linear (Can't find supply)
-    *   ML4900
-    *   ML4902
-*   Unisem (Can't find supply)
-    *   US3004 (very poor efficiency)
-*   Unitrode (Can't find supply)
-    *   UCC3882 (1.8V min, poor efficiency)
+* Analog Devices
+  * ADP3154
+* Cherry (Now OnSemi) (Small BOM, nice regulation, almost not supply)
+  * CS5161/66
+  * CS5150/5151
+* Elantec (made by Intersil)
+  * EL7571/7556
+* ST L6911C
+* National Semiconductor
+  * LM2636
+  * LM2635
+* Raytheon/Fairchild
+  * RC5051/53/54/57 (Small BOM, good regulation, unstable supply)
+  * RC5041/42
+* LinFinity
+  * LX1660/61
+  * LX1662/63
+  * LX1664/65 (Very low cost part)
+* Linear
+  * LTC1552/3 (Still in production, small BOM)
+  * LT1430/35
+  * LT1753 (Still in production, small BOM)
+* Harris (Now Intersil)
+  * HIP6004/5/14 (Already have some, Large BOM)
+  * HIP6002/3
+  * HIP6019 (4 different output voltages, suitable for motherboards)
+* Maxim
+  * MAX1624
+  * MAX1636 (Very impressive, _shooting for the stars_) But _OH GOD THE PRICE!_
+  * MAX1710 (Only up to 2.1V for Mobile K6-2+)
+* Semtech (Large BOM, low efficiency)
+  * SC1151/52
+  * SC1172/73
+  * SC1182/83
+  * SC1186
+* Texas Instruments TPS5210 (Could be nice but availability is poor)
+* Micro Linear (Can't find supply)
+  * ML4900
+  * ML4902
+* Unisem (Can't find supply)
+  * US3004 (very poor efficiency)
+* Unitrode (Can't find supply)
+  * UCC3882 (1.8V min, poor efficiency)
 
 Of all of them with the exception of a very select few however come with a major caveat.
 

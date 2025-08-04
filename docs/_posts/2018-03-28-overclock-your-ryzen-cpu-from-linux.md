@@ -1,4 +1,7 @@
 ---
+toc_title: "Ryzen Overlocking"
+toc: true
+layout: post
 title: "Overclock your Ryzen CPU from linux"
 date: 2018-03-28
 excerpt: "Overclock your Ryzen CPU without the UEFI while running Linux, no proprietary tools needed."

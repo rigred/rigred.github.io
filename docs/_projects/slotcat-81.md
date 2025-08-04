@@ -2,6 +2,7 @@
 title: SlotCat-81
 excerpt: The SlotCat-81 is a new design Socket-8 to Slot-1 adapter
 date: 2023-05-31 13:30:15.000000000 +02:00
+type: post
 header:
  teaser: /assets/2023/05/Slotcat-8-1024x514.jpg
 categories: 

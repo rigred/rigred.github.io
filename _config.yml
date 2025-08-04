@@ -30,11 +30,15 @@ baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 github_username:  rigred
 
-remote_theme: "mmistakes/minimal-mistakes"
+remote_theme: rigred/jekyll-theme-squishy
+
+plugins_dir: _plugins
 
 # Build settings
 plugins:
+  - jekyll-remote-theme
   - jekyll-paginate
+  - jekyll-toc
   - jekyll-sitemap
   - jekyll-archives
   - jekyll-gist
@@ -42,11 +46,18 @@ plugins:
   - jekyll-include-cache
 
 whitelist:
+  - jekyll-remote-theme
   - jekyll-paginate
   - jekyll-sitemap
   - jekyll-gist
   - jekyll-feed
+  - jekyll-toc
   - jekyll-include-cache
+
+# jekyll-toc configuration
+toc:
+  min_level: 2
+  max_level: 4
 
 category_archive:
   type: liquid
@@ -69,6 +80,10 @@ compress_html:
   clippings: all
   ignore:
     envs: development
+
+# Optional: Enable SASS compression
+sass:
+  style: compressed
 
 # Exclude from processing.
 # The following items will not be processed, by default.
@@ -101,76 +116,34 @@ search: true
 search_full_content: true
 
 defaults:
-  # _posts
+# Default front matter settings (optional but recommended)
   - scope:
       path: ""
       type: posts
     values:
-      layout: single
-      show_date: true
-      author_profile: false
-      read_time: true
-      comments: true
-      related: true
-      toc: true
-      toc_sticky: true
-  # _pages
-  - scope:
-      path: ""
-      type: pages
-    values:
-      layout: single
-      author_profile: false
-      toc: false
-      toc_sticky: false
-  # _projects
-  - scope:
-      path: ""
-      type: projects
-    values:
-      layout: single
-      read_time: false
-      author_profile: false
-      share: true
-      comments: false
-      toc: true
-      toc_sticky: true
-  # _software
-  - scope:
-      path: ""
-      type: software
-    values:
-      layout: single
-      read_time: false
-      author_profile: false
-      share: true
-      comments: false
-      toc: true
-      toc_sticky: true
-  # _hardare
+      layout: post
+      toc: false # Disable TOC by default for all posts
   - scope:
       path: ""
       type: hardware
     values:
-      layout: single
-      read_time: false
-      author_profile: false
-      share: true
-      comments: false
+      layout: post
       toc: true
-      toc_sticky: true
-  # _misc
+  - scope:
+      path: ""
+      type: software
+    values:
+      layout: post
+  - scope:
+      path: ""
+      type: projects
+    values:
+      layout: post
   - scope:
       path: ""
       type: misc
     values:
-      layout: single
-      read_time: false
-      author_profile: false
-      share: true
-      comments: false
-      toc: true
-      toc_sticky: true
+      layout: post
 
 collections_dir: docs
 collections:
@@ -186,3 +159,7 @@ collections:
   misc:
     output: true
     permalink: /misc/:name/
+  scripts:
+    output: true
+    permalink: /scripts/:name/
+

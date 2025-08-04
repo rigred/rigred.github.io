@@ -2,6 +2,7 @@
 title: Socket-57
 date: 2022-03-25 08:04:15.000000000 +02:00
 excerpt: A socket 5 to 7 voltage plane adapter
+type: post
 header:
  teaser: /assets/2022/03/image-8.png
 categories: 
