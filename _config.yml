@@ -32,8 +32,6 @@ github_username:  rigred
 
 remote_theme: rigred/jekyll-theme-squishy
 
-plugins_dir: _plugins
-
 # Build settings
 plugins:
   - jekyll-remote-theme
@@ -44,6 +42,8 @@ plugins:
   - jekyll-gist
   - jekyll-feed
   - jekyll-include-cache
+
+plugins_dir: _plugins
 
 # jekyll-toc configuration
 toc:
